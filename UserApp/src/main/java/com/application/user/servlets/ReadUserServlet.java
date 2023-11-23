@@ -19,7 +19,6 @@ import java.sql.Statement;
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet("/ReadServlet")
 public class ReadUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection;
@@ -29,7 +28,9 @@ public class ReadUserServlet extends HttpServlet {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/mydb", "root", "root");
+			connection = DriverManager.getConnection(config.getInitParameter("dbUrl"),
+					config.getInitParameter("dbUser"),
+					config.getInitParameter("dbPassword"));
 			connection.setAutoCommit(true);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
