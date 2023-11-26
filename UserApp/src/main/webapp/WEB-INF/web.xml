@@ -21,24 +21,24 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  
+  <context-param>
+  		<param-name>dbUrl</param-name>
+  		<param-value>jdbc:mysql://localhost/mydb</param-value>
+  	</context-param>
+  	  	<context-param>
+  		<param-name>dbUser</param-name>
+  		<param-value>root</param-value>
+  	</context-param>
+  	
+  	  	<context-param>
+  		<param-name>dbPassword</param-name>
+  		<param-value>root</param-value>
+  	</context-param>
   
   <servlet>
   	<servlet-name>readUserServlet</servlet-name>
   	<servlet-class>com.application.user.servlets.ReadUserServlet</servlet-class>
-  	<init-param>
-  		<param-name>dbUrl</param-name>
-  		<param-value>jdbc:mysql://localhost/mydb</param-value>
-  	</init-param>
-  	  	<init-param>
-  		<param-name>dbUser</param-name>
-  		<param-value>root</param-value>
-  	</init-param>
   	
-  	  	<init-param>
-  		<param-name>dbPassword</param-name>
-  		<param-value>root</param-value>
-  	</init-param>
   </servlet>
   
   <servlet-mapping>

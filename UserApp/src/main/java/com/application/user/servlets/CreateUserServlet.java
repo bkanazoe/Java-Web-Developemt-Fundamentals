@@ -1,6 +1,7 @@
 package com.application.user.servlets;
 
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,18 +14,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
 
 
 
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet(urlPatterns = "/addServlet", initParams = {
-		@WebInitParam(name = "dbUrl", value = "jdbc:mysql://localhost/mydb" ),
-		@WebInitParam(name = "dbUser", value = "root"),
-		@WebInitParam(name = "dbPassword", value = "root")
-		
-})
+@WebServlet(urlPatterns = "/addServlet")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection;
@@ -33,10 +30,22 @@ public class CreateUserServlet extends HttpServlet {
 	public void init(ServletConfig config) {
 		
 		try {
+			
+			ServletContext context = config.getServletContext();
+			
+			Enumeration<String> initParameterNames = context.getInitParameterNames();
+			
+			while (initParameterNames.hasMoreElements()) {
+				
+				String element = initParameterNames.nextElement();
+				System.out.println("Context Param Name: " + element);
+				System.out.println("context Param Value: " + context.getInitParameter(element));
+			}
+			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(config.getInitParameter("dbUrl"),
-					config.getInitParameter("dbUser"),
-					config.getInitParameter("dbPassword"));  
+			connection = DriverManager.getConnection(context.getInitParameter("dbUrl"),
+					context.getInitParameter("dbUser"),
+					context.getInitParameter("dbPassword"));
 			connection.setAutoCommit(true);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.application.user.servlets;
 
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,10 +28,11 @@ public class ReadUserServlet extends HttpServlet {
 	public void init(ServletConfig config) {
 		
 		try {
+			ServletContext context = config.getServletContext();
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(config.getInitParameter("dbUrl"),
-					config.getInitParameter("dbUser"),
-					config.getInitParameter("dbPassword"));
+			connection = DriverManager.getConnection(context.getInitParameter("dbUrl"),
+					context.getInitParameter("dbUser"),
+					context.getInitParameter("dbPassword"));
 			connection.setAutoCommit(true);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
