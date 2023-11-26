@@ -16,17 +16,21 @@ public class AccountDAO{
 			
 			Statement createStatement = connection.createStatement();
 			
-			String createTable = "create table account (accno int, lastname varchar(25), firstname varchar(25), bal int)";
-			createStatement.executeUpdate(createTable);
+			/*
+			 * String createTable =
+			 * "create table account (accno int, lastname varchar(25), firstname varchar(25), bal int)"
+			 * ; createStatement.executeUpdate(createTable);
+			 */
 			
-			//int result = createStatement.executeUpdate("insert into account values(1, 'John', 'Miller', 1000)");
-			//System.out.println(result +  " rows got inserted");
+			int result = createStatement.executeUpdate("insert into account values(1, 'John', 'Miller', 1000)");
+			System.out.println(result +  " rows got inserted");
 			
 			
-			  int result =
-			  createStatement.executeUpdate("update account set bal=5000 where accno=1");
-			  System.out.println(result + " rows got updated");
-			 
+			/*
+			 * int result =
+			 * createStatement.executeUpdate("update account set bal=5000 where accno=1");
+			 * System.out.println(result + " rows got updated");
+			 */
 			
 				/*
 				 * int result =
